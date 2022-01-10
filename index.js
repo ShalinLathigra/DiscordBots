@@ -9,6 +9,23 @@ const { Client, Collection, Intents } = require('discord.js');
 // db.init();
 
 /*
+    STRING FORMATTING
+ */
+
+// First, checks if it isn't implemented yet.
+if (!String.prototype.format) {
+    String.prototype.format = function() {
+      var args = arguments;
+      return this.replace(/{(\d+)}/g, function(match, number) { 
+        return typeof args[number] != 'undefined'
+          ? args[number]
+          : match
+        ;
+      });
+    };
+  }
+
+/*
         Set Up Client
  */
 const client = new Client({ intents: [Intents.FLAGS.GUILDS]});
